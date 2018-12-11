@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: postgre
+    environment: testing
+  name: db
+#  namespace: testing
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+      - name: db
+        image: docker.io/library/postgres:9.6
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: POSTGRES_USER
+          value: odoo
+        - name: POSTGRES_PASSWORD
+          value: odoo
+        ports:
+        - containerPort: 5432
+          name: db
+          protocol: TCP
+        volumeMounts:
+        - name: postgre-persistent-storage
+          mountPath: /var/lib/postgresql/data
+          subPath: postgres
+      volumes:
+        - name: postgre-persistent-storage
+          persistentVolumeClaim:
+            claimName: postgre-volumeclaim
