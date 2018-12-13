@@ -3,12 +3,12 @@ kind: Service
 metadata:
   labels:
     app: odoo
-  name: odoo
+  name: odoo-service
 spec:
   type: LoadBalancer
   ports:
-    - port: 80
+    - port: 8069
       targetPort: 8069
       protocol: TCP
   selector:
-    environment: testing
+    app: odoo

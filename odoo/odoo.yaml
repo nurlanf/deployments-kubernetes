@@ -3,9 +3,7 @@ kind: Deployment
 metadata:
   labels:
     app: odoo
-    environment: testing
   name: odoo
-#  namespace: testing
 spec:
   replicas: 3
   selector:
@@ -18,15 +16,13 @@ spec:
     spec:
       containers:
       - name: odoo
-        image: docker.io/library/odoo:12.0
+        image: docker.io/library/odoo:11.0
         imagePullPolicy: IfNotPresent
         env:
         - name: HOST
           value: db
         ports:
         - containerPort: 8069
-          name: http
-          protocol: TCP
         volumeMounts:
         - name: odoo-web-data-persistent
           mountPath: /var/lib/odoo

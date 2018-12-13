@@ -2,10 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: postgre
-    environment: testing
+    app: postgres
   name: db
-#  namespace: testing
 spec:
   replicas: 1
   selector:
