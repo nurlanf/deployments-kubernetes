@@ -1,0 +1,62 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sub1
+spec:
+  selector:
+    app: odoo
+  clusterIP: None
+  ports:
+  - name: foo # Actually, no port is needed.
+    port: 1234
+    targetPort: 1234
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: odoo
+  labels:
+    app: odoo
+spec:
+  hostname: odoo
+  subdomain: sub1
+  containers:
+    - name: odoo
+      image: docker.io/library/odoo:12.0
+      imagePullPolicy: IfNotPresent
+      env:
+        - name: HOST
+          value: db.sub1.default.svc.cluster.local
+      ports:
+        - containerPort: 8069
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: postgres
+  labels:
+    app: odoo
+spec:
+  hostname: db
+  subdomain: sub1
+  containers:
+    - name: postgres
+      image: docker.io/library/postgres:9.6
+      imagePullPolicy: IfNotPresent
+      env:
+        - name: POSTGRES_USER
+          value: odoo
+        - name: POSTGRES_PASSWORD
+          value: odoo
+      ports:
+        - containerPort: 5432
+          name: db
+          protocol: TCP
+      volumeMounts:
+        - name: postgre-persistent-storage
+          mountPath: /var/lib/postgresql/data
+          subPath: postgres
+  volumes:
+    - name: postgre-persistent-storage
+      persistentVolumeClaim:
+        claimName: postgre-volumeclaim
