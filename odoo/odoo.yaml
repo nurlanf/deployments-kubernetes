@@ -3,30 +3,36 @@ kind: Deployment
 metadata:
   labels:
     app: odoo
+    tier: app
   name: odoo
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: odoo
+      tier: app
   template:
     metadata:
+      name: odoo
       labels:
         app: odoo
+        tier: app
     spec:
+      hostname: odoo
+      subdomain: sub1
       containers:
       - name: odoo
         image: docker.io/library/odoo:11.0
         imagePullPolicy: IfNotPresent
         env:
         - name: HOST
-          value: db
+          value: db.sub1.default.svc.cluster.local
         ports:
         - containerPort: 8069
-        volumeMounts:
-        - name: odoo-web-data-persistent
-          mountPath: /var/lib/odoo
-      volumes:
-        - name: odoo-web-data-persistent
-          persistentVolumeClaim:
-            claimName: odoo-lib-volumeclaim
+#        volumeMounts:
+#        - name: odoo-web-data-persistent
+#          mountPath: /var/lib/odoo
+#      volumes:
+#        - name: odoo-web-data-persistent
+#          persistentVolumeClaim:
+#            claimName: odoo-lib-volumeclaim

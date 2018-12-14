@@ -7,8 +7,9 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-    - port: 8069
+    - port: 80
       targetPort: 8069
       protocol: TCP
   selector:
     app: odoo
+    tier: app

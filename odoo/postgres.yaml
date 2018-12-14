@@ -2,20 +2,26 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: postgres
-  name: db
+    tier: db
+    app: odoo
+  name: postgres
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: postgres
+      app: odoo
+      tier: db
   template:
     metadata:
+      name: postgres
       labels:
-        app: postgres
+        tier: db
+        app: odoo
     spec:
+      hostname: db
+      subdomain: sub1
       containers:
-      - name: db
+      - name: postgres
         image: docker.io/library/postgres:9.6
         imagePullPolicy: IfNotPresent
         env:
@@ -25,13 +31,13 @@ spec:
           value: odoo
         ports:
         - containerPort: 5432
-          name: db
+          name: postgres
           protocol: TCP
-        volumeMounts:
-        - name: postgre-persistent-storage
-          mountPath: /var/lib/postgresql/data
-          subPath: postgres
-      volumes:
-        - name: postgre-persistent-storage
-          persistentVolumeClaim:
-            claimName: postgre-volumeclaim
+#        volumeMounts:
+#        - name: postgre-persistent-storage
+#          mountPath: /var/lib/postgresql/data
+#          subPath: postgres
+#      volumes:
+#        - name: postgre-persistent-storage
+#          persistentVolumeClaim:
+#            claimName: postgre-volumeclaim
