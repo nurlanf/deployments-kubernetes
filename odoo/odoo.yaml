@@ -22,7 +22,7 @@ spec:
       subdomain: sub1
       containers:
       - name: odoo
-        image: docker.io/library/odoo:11.0
+        image: docker.io/library/odoo
         imagePullPolicy: IfNotPresent
         env:
         - name: HOST

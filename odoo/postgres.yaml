@@ -22,9 +22,11 @@ spec:
       subdomain: sub1
       containers:
       - name: postgres
-        image: docker.io/library/postgres:9.6
+        image: docker.io/library/postgres:10
         imagePullPolicy: IfNotPresent
         env:
+        - name: POSTGRES_DB
+          value: postgres
         - name: POSTGRES_USER
           value: odoo
         - name: POSTGRES_PASSWORD
