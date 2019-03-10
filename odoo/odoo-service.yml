@@ -3,7 +3,7 @@ kind: Service
 metadata:
   labels:
     app: odoo
-  name: odoo-service
+  name: odoo
 spec:
   type: LoadBalancer
   ports:
@@ -12,4 +12,3 @@ spec:
       protocol: TCP
   selector:
     app: odoo
-    tier: app

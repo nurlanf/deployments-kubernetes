@@ -2,8 +2,9 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/heapster" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/kubernetes-engine-samples" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/metrics-server" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/heapster" vcs="" />
+    <mapping directory="$PROJECT_DIR$/kubernetes-engine-samples" vcs="" />
+    <mapping directory="$PROJECT_DIR$/metrics-server" vcs="" />
+    <mapping directory="$PROJECT_DIR$/odoo/odoo-runbot-docker" vcs="Git" />
   </component>
 </project>
