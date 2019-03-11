@@ -1,0 +1,7 @@
+apiVersion: v1
+data:
+  proxy-redirect-from: "default"
+kind: ConfigMap
+metadata:
+  name: nginx-configuration
+
