@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 swapoff -a
 echo net/bridge/bridge-nf-call-ip6tables = 1 >> /etc/ufw/sysctl.conf
 echo net/bridge/bridge-nf-call-iptables = 1 >> /etc/ufw/sysctl.conf
