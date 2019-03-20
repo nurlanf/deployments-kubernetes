@@ -1,0 +1,9 @@
+<source>
+  @type tail
+  tag "#{ENV['TAG_VALUE']}"
+  path /var/log/nginx/access.log
+  format nginx
+</source>
+<match *.*>
+  @type stdout
+</match>
