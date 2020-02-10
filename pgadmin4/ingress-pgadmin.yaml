@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  labels:
+    app: pgadmin
+  name: pgadmin
+  namespace: saas
+spec:
+  rules:
+  - host: pgadmin-insurance.saas.erpgo.az
+    http:
+      paths:
+      - backend:
+          serviceName: pgadmin
+          servicePort: 80
+        path: /
+  tls:
+  - hosts:
+    - '*.saas.erpgo.az'
+    - pgadmin-insurance.saas.erpgo.az
+    secretName: wildcard-saas-erpgo-tls
+status:
+  loadBalancer: {}

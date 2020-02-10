@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: pgadmin
+  name: pgadmin
+  namespace: saas
+spec:
+  selector:
+    matchLabels:
+      app: pgadmin
+  template:
+    metadata:
+      labels:
+        app: pgadmin
+    spec:
+      containers:
+      - image: dpage/pgadmin4
+        imagePullPolicy: Always
+        name: pgadmin4
+        env:
+        - name: PGADMIN_DEFAULT_EMAIL
+          value: "admin@erpgo.az"
+        - name: PGADMIN_DEFAULT_PASSWORD
+          value: "SIu23988s@@3ss"
+
