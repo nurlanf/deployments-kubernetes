@@ -1,0 +1,19 @@
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Issuer
+metadata:
+  name: erpgo-dns-issuer
+spec:
+  acme:
+    email: admin@exrp.pl
+    privateKeySecretRef:
+      name: erpgo-dns-issuer
+    server: https://acme-v02.api.letsencrypt.org/directory
+    solvers:
+    - dns01:
+        clouddns:
+          # The ID of the GCP project
+          project: leafy-momentum-239412
+          # This is the secret used to access the service account
+          serviceAccountSecretRef:
+            name: clouddns-dns01-solver-svc-acct
+            key: key.json
