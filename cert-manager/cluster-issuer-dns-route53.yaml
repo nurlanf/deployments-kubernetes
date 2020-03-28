@@ -6,13 +6,13 @@ spec:
   acme:
     email: admin@exrp.pl
     privateKeySecretRef:
-      name: erpgo-dns-issuer
+      name: erpgo-sh-dns-issuer
     server: https://acme-v02.api.letsencrypt.org/directory
     solvers:
     - selector:
         dnsZones:
         - "erpgo.sh"
-    - dns01:
+      dns01:
         route53:
           region: us-east-1
           accessKeyID: AKIA2NHV76K75W3HKRXV
